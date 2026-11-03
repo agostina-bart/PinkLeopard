@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<style>
+.header-area {
+    background-color: #1f2122 !important;
+    border-radius: 23px !important;       /* Bordes redondeados en las 4 esquinas */
+    max-width: 1320px !important;         /* Ancho máximo alineado con las demás cajas */
+    width: 90% !important;                /* Ancho adaptable */
+    margin: 20px auto 0 auto !important;  /* Margen superior y centrado automático */
+    left: 0 !important;
+    right: 0 !important;
+  }
+	/* 1. Da bordes redondeados a las tarjetas de productos destacados y prepara la animación */
+  .other-games .item {
+    background-color: #1f2122 !important;
+    border-radius: 20px !important;       /* Esquinas redondeadas en la tarjeta */
+    overflow: hidden !important;          /* Asegura que la imagen respete el redondeo */
+    transition: all 0.3s ease-in-out !important;
+  }
+
+  /* 2. Aplica el cambio a rosa y la elevación cuando pasas el cursor por encima */
+  .other-games .item:hover {
+    background-color: #ff6699 !important; /* Rosa vibrante */
+    transform: translateY(-5px) !important; /* Pequeña elevación visual */
+    box-shadow: 0 10px 25px rgba(255, 102, 153, 0.4) !important; /* Sombra rosa abajo */
+  }
+
+  /* 3. Cambia los textos interiores a blanco o tonos claros solo durante el hover */
+  .other-games .item:hover h4 {
+    color: #ffffff !important;
+  }
+  
+  .other-games .item:hover span {
+    color: #fff0f3 !important; /* Rosa pastel para el subtítulo */
+  }
+
+  .other-games .item:hover ul li {
+    color: #ffffff !important; /* Cambia el color de las estrellas y descargas */
+  }
+	/* Estilos para la Ventana Modal (Popup) */
+  .custom-modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Fondo oscuro semitransparente */
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .custom-modal-content {
+    background-color: #1f2122;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    border: 2px solid #ff6699;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  /* Botón de la cruz para salir */
+  .custom-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #afafaf;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .custom-modal-close:hover {
+    color: #ff6699;
+  }
+
+  /* Imagen y detalles dentro del modal */
+  .custom-modal-img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 20px;
+  }
+
+  .custom-modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+
+  .custom-modal-desc {
+    font-size: 14px;
+    color: #afafaf;
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+
+  .custom-modal-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff6699;
+    margin-bottom: 20px;
+  }
+
+  /* Botón "Ver en la tienda oficial" (Blanco por defecto, rosa al hover y sostenido tras clic) */
+  .btn-tienda-oficial {
+    display: inline-block;
+    background-color: #ffffff !important;
+    color: #1f2122 !important;
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-tienda-oficial:hover, 
+  .btn-tienda-oficial.clicked {
+    background-color: #ff6699 !important;
+    color: #ffffff !important;
+    box-shadow: 0 5px 15px rgba(255, 102, 153, 0.4);
+  }
+	</style>
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Cyborg - Awesome HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+  </head>
+<body class="align-content-md-stretch" style="background-image: url('assets/images/background-pinkleo.png'); background-size: contain; background-position: center;">
+<body>
+    <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Search End ***** -->
+                    <div class="search-input">
+                      <form id="search" action="#">
+                        <input type="text" placeholder="Busca en Pink Leopard" id='searchText' name="searchKeyword" onkeypress="handle" />
+                        <i class="fa fa-search"></i>
+                      </form>
+                    </div>
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                  <ul class="nav">
+                        <li><a href="index.html" class="active">Inicio</a></li>
+                        <li><a href="browse.html">Revista</a></li>
+                        <li><a href="details.html">Maquillaje</a></li>
+                        <li><a href="streams.html">Playlist</a></li>
+                        <li><a href="profile.html">Usuario<img src="assets/images/profile-header.png" alt=""></a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+			
+			
+         <!-- ***** Other Start ***** -->
+          <div class="other-games">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section">
+                  <h4><em>Productos destacados</em> </h4>
+                </div>
+              </div>
+              
+              <!-- Producto 1 -->
+              <div class="col-lg-6">
+                <div class="item open-modal" 
+                     data-img="assets/images/game-01.jpg" 
+                     data-title="Gyaru Nails" 
+                     data-desc="Iconico emprendimiento de manicuría con diseños detallados, pedrería y técnicas avanzadas de gel UV para un acabado impecable." 
+                     data-price="$24.500" 
+                     data-link="https://httpstat.us/404">
+                  <img src="assets/images/game-01.jpg" alt="" class="templatemo-item">
+                  <h4>Gyaru Nails&nbsp;</h4>
+                  <span>Iconico emprendimiento...&nbsp; &nbsp;</span>
+                  <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 290</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Producto 2 -->
+              <div class="col-lg-6">
+                <div class="item open-modal" 
+                     data-img="assets/images/game-02.jpg" 
+                     data-title="Sanrio Oficial" 
+                     data-desc="Colección especial Kuromi y Hello Kitty con accesorios exclusivos, papelería y coleccionables importados directos de Japón." 
+                     data-price="$18.900" 
+                     data-link="https://httpstat.us/404">
+                  <img src="assets/images/game-02.jpg" alt="" class="templatemo-item">
+                  <h4>Sanrio Oficial&nbsp;</h4>
+                  <span>Coleccion especial Kuromi...&nbsp;</span>
+                  <ul>
+                    <li><i class="fa fa-star"></i> 4</li>
+                    <li><i class="fa fa-download"></i> 2875</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Producto 3 -->
+              <div class="col-lg-6">
+                <div class="item open-modal" 
+                     data-img="assets/images/game-03.jpg" 
+                     data-title="IDI MAKE UP" 
+                     data-desc="Maquillaje de larga duración formulado especialmente para pieles sensibles, con pigmentos intensos y acabados de alta definición." 
+                     data-price="$32.000" 
+                     data-link="https://httpstat.us/404">
+                  <img src="assets/images/game-03.jpg" alt="" class="templatemo-item">
+                  <h4>IDI MAKE UP&nbsp;</h4>
+                  <span>Maquillaje de larga duración...&nbsp;</span>
+                  <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 290</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Producto 4 -->
+              <div class="col-lg-6">
+                <div class="item open-modal" 
+                     data-img="assets/images/game-02.jpg" 
+                     data-title="KittyStore" 
+                     data-desc="Cosméticos y accesorios super cute para completar tu rutina diaria con un estilo tierno, vibrante y lleno de brillo." 
+                     data-price="$15.500" 
+                     data-link="https://httpstat.us/404">
+                  <img src="assets/images/game-02.jpg" alt="" class="templatemo-item">
+                  <h4>KittyStore&nbsp;</h4>
+                  <span>Makeup super cutee...&nbsp;</span>
+                  <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 2902</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Producto 5 -->
+              <div class="col-lg-6">
+                <div class="item open-modal" 
+                     data-img="assets/images/game-03.jpg" 
+                     data-title="IDI WATERPROOF" 
+                     data-desc="Grandes descuentos en la línea resistente al agua. Máxima durabilidad frente al agua, sudor y largas jornadas." 
+                     data-price="$28.000" 
+                     data-link="https://httpstat.us/404">
+                  <img src="assets/images/game-03.jpg" alt="" class="templatemo-item">
+                  <h4>IDI WATERPROOF&nbsp;</h4>
+                  <span>Grandes descuentos en...&nbsp;</span>
+                  <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 2345</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Producto 6 -->
+              <div class="col-lg-6">
+                <div class="item open-modal" 
+                     data-img="assets/images/game-01.jpg" 
+                     data-title="GYARU ACCES." 
+                     data-desc="Accesorios personalizados hechos a mano, ideales para destacar en cualquier evento alternativo o de estilo callejero." 
+                     data-price="$12.000" 
+                     data-link="https://httpstat.us/404">
+                  <img src="assets/images/game-01.jpg" alt="" class="templatemo-item">
+                  <h4>GYARU ACCES.&nbsp;</h4>
+                  <span>Accesorios personalizados...&nbsp;</span>
+                  <ul>
+                    <li><i class="fa fa-star"></i> 4.8</li>
+                    <li><i class="fa fa-download"></i> 2785</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- ***** Other End ***** -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Ventana Modal para Productos ***** -->
+  <div id="productModal" class="custom-modal">
+    <div class="custom-modal-content">
+      <span class="custom-modal-close">&times;</span>
+      <img id="modalImg" src="" alt="Producto" class="custom-modal-img">
+      <h3 id="modalTitle" class="custom-modal-title"></h3>
+      <p id="modalDesc" class="custom-modal-desc"></p>
+      <div id="modalPrice" class="custom-modal-price"></div>
+      <a id="modalLink" href="#" target="_blank" class="btn-tienda-oficial">Ver en la tienda oficial</a>
+    </div>
+  </div>
+  <!-- ***** Fin Ventana Modal ***** -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Pink Leopard Magazine © 2026. Todos los derechos reservados.. 
+          
+          <br>
+          <a href="https://themewagon.com" target="_blank">&nbsp;</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+<script>
+    $(document).ready(function() {
+      // Abrir modal y rellenar información
+      $('.open-modal').on('click', function() {
+        $('#modalImg').attr('src', $(this).data('img'));
+        $('#modalTitle').text($(this).data('title'));
+        $('#modalDesc').text($(this).data('desc'));
+        $('#modalPrice').text($(this).data('price'));
+        $('#modalLink').attr('href', $(this).data('link'));
+        
+        // Restablecer el estado del botón al abrir
+        $('#modalLink').removeClass('clicked');
+        
+        $('#productModal').css('display', 'flex');
+      });
+
+      // Efecto sostenido en rosa al hacer clic en el botón
+      $('#modalLink').on('click', function() {
+        $(this).addClass('clicked');
+      });
+
+      // Cerrar modal al hacer clic en la cruz (x)
+      $('.custom-modal-close').on('click', function() {
+        $('#productModal').css('display', 'none');
+      });
+
+      // Cerrar modal al hacer clic fuera del contenido oscuro
+      $('#productModal').on('click', function(e) {
+        if ($(e.target).is('#productModal')) {
+          $('#productModal').css('display', 'none');
+        }
+      });
+    });
+  </script>
+<script>
+  $(document).ready(function() {
+    $('.menu-trigger').on('click', function(e) {
+      e.preventDefault();
+      $(this).toggleClass('active');
+      $('.header-area .main-nav .nav').slideToggle(200);
+    });
+  });
+</script>
+  </body>
+
+</html>
